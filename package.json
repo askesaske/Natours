@@ -4,7 +4,14 @@
   "description": "first project of the course",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "node-sass natours/sass/main.scss natours/css/style.css -w"
+    "watch:sass": "node-sass natours/sass/main.scss natours/css/style.css -w",
+    "devserver": "live-server",
+    "start": "npm-run-all --parallel devserver watch:sass",
+
+    "compile:sass": "node-sass natours/sass/main.scss natours/css/style.comp.css",
+    "concat:css": "concat -o natours/css/style.concat.css natours/css/icon-font.css natours/css/style.comp.css",
+    "compress:css": "node-sass natours/css/style.comp.css natours/css/style.min.css --output-style compressed",
+    "build:css": "npm-run-all compile:sass concat:css compress:css"
   },
   "repository": {
     "type": "git",
@@ -18,5 +25,11 @@
   "homepage": "https://github.com/askesaske/Natours#readme",
   "dependencies": {
     "node-sass": "^4.14.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "concat": "^1.0.3",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^7.1.1"
   }
 }
